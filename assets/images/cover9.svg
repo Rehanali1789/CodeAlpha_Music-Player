@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" style="stop-color:#EC4899"/><stop offset="100%" style="stop-color:#F59E0B"/>
+  </linearGradient></defs>
+  <rect width="300" height="300" fill="url(#g)"/>
+  <polygon points="150,55 240,185 60,185" fill="rgba(255,255,255,0.1)"/>
+  <polygon points="150,85 215,180 85,180" fill="rgba(255,255,255,0.1)"/>
+  <circle cx="150" cy="130" r="18" fill="rgba(255,255,255,0.25)"/>
+  <text x="150" y="232" font-family="sans-serif" font-size="22" font-weight="bold" fill="white" text-anchor="middle">Piya Aaye Na</text>
+  <text x="150" y="256" font-family="sans-serif" font-size="12" fill="rgba(255,255,255,0.7)" text-anchor="middle">K.K &amp; Tulsi • Aashiqui 2</text>
+</svg>

@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" style="stop-color:#6366F1"/><stop offset="100%" style="stop-color:#EC4899"/>
+  </linearGradient></defs>
+  <rect width="300" height="300" fill="url(#g)"/>
+  <!-- heart shape -->
+  <path d="M150 220 C60 160 60 80 110 70 C130 65 150 85 150 85 C150 85 170 65 190 70 C240 80 240 160 150 220Z" fill="rgba(255,255,255,0.18)"/>
+  <path d="M150 200 C80 150 80 95 115 87 C132 83 150 100 150 100 C150 100 168 83 185 87 C220 95 220 150 150 200Z" fill="rgba(255,255,255,0.12)"/>
+  <text x="150" y="252" font-family="sans-serif" font-size="24" font-weight="bold" fill="white" text-anchor="middle">Tum Hi Ho</text>
+  <text x="150" y="276" font-family="sans-serif" font-size="13" fill="rgba(255,255,255,0.75)" text-anchor="middle">Arijit Singh • Aashiqui 2</text>
+</svg>

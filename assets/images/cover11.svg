@@ -1,0 +1,10 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="300" height="300" viewBox="0 0 300 300">
+  <defs><linearGradient id="g" x1="0%" y1="0%" x2="100%" y2="100%">
+    <stop offset="0%" style="stop-color:#9333EA"/><stop offset="100%" style="stop-color:#EC4899"/>
+  </linearGradient></defs>
+  <rect width="300" height="300" fill="url(#g)"/>
+  <path d="M150 215 C75 160 75 85 118 75 C136 70 150 88 150 88 C150 88 164 70 182 75 C225 85 225 160 150 215Z" fill="rgba(255,255,255,0.15)"/>
+  <path d="M150 195 C90 150 90 97 122 89 C138 85 150 100 150 100 C150 100 162 85 178 89 C210 97 210 150 150 195Z" fill="rgba(255,255,255,0.1)"/>
+  <text x="150" y="248" font-family="sans-serif" font-size="18" font-weight="bold" fill="white" text-anchor="middle">Tum Hi Ho (Reprise)</text>
+  <text x="150" y="272" font-family="sans-serif" font-size="12" fill="rgba(255,255,255,0.7)" text-anchor="middle">Arijit Singh • Aashiqui 2</text>
+</svg>
