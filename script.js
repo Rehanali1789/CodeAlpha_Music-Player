@@ -169,6 +169,11 @@ const notifTitle    = document.getElementById('notif-title');
 const notifArtist   = document.getElementById('notif-artist');
 const playlistToggle= document.getElementById('playlist-toggle');
 const sidebar       = document.getElementById('sidebar');
+const searchInput   = document.getElementById('search-input');
+const searchClear   = document.getElementById('search-clear');
+const noResults     = document.getElementById('no-results');
+const playerBg      = document.getElementById('player-bg');
+const toastCover    = document.getElementById('toast-cover');
 const iconPlay      = playBtn.querySelector('.icon-play');
 const iconPause     = playBtn.querySelector('.icon-pause');
 const iconVol       = muteBtn.querySelector('.icon-vol');
@@ -192,6 +197,41 @@ window.addEventListener('load', () => {
   setTimeout(() => {
     loader.classList.add('hidden');
   }, 1200);
+});
+
+/* ============================================================
+   SEARCH
+   ============================================================ */
+function filterPlaylist(query) {
+  const q = query.trim().toLowerCase();
+  const items = playlist.querySelectorAll('li');
+  let visible = 0;
+
+  items.forEach(li => {
+    const idx   = parseInt(li.dataset.index);
+    const song  = songs[idx];
+    const match = !q
+      || song.title.toLowerCase().includes(q)
+      || song.artist.toLowerCase().includes(q);
+
+    li.classList.toggle('hidden-item', !match);
+    if (match) visible++;
+  });
+
+  // show/hide no-results state
+  noResults.style.display  = visible === 0 ? 'flex' : 'none';
+  playlist.style.display   = visible === 0 ? 'none' : '';
+
+  // show/hide clear button
+  searchClear.style.display = q ? 'flex' : 'none';
+}
+
+searchInput.addEventListener('input', () => filterPlaylist(searchInput.value));
+
+searchClear.addEventListener('click', () => {
+  searchInput.value = '';
+  searchInput.focus();
+  filterPlaylist('');
 });
 
 /* ============================================================
@@ -235,17 +275,30 @@ function loadSong(index) {
   const song = songs[index];
   currentIndex = index;
 
-  // Update info
+  // Update text info
   songTitle.textContent  = song.title;
   songArtist.textContent = song.artist;
 
-  // Album cover
-  // Apply song-specific gradient to placeholder background
+  // Dynamic blurred background from album art or gradient
+  if (song.cover) {
+    playerBg.style.backgroundImage = `url('${song.cover}')`;
+  } else if (song.gradient) {
+    playerBg.style.backgroundImage =
+      `linear-gradient(135deg, ${song.gradient[0]}, ${song.gradient[1]})`;
+  }
+  playerBg.classList.add('visible');
+
+  // Toast cover color
+  if (song.gradient) {
+    toastCover.style.background =
+      `linear-gradient(135deg, ${song.gradient[0]}, ${song.gradient[1]})`;
+  }
+
+  // Album cover — apply gradient to placeholder
   if (song.gradient) {
     albumPlaceholder.style.background =
       `linear-gradient(135deg, ${song.gradient[0]}, ${song.gradient[1]})`;
   }
-
   if (song.cover) {
     albumImg.src = song.cover;
     albumImg.classList.add('visible');
@@ -264,22 +317,19 @@ function loadSong(index) {
   audio.load();
 
   // Reset progress
-  progressFill.style.width = '0%';
-  progressThumb.style.left = '-7px';
+  progressFill.style.width  = '0%';
+  progressThumb.style.left  = '0px';
   currentTimeEl.textContent = '0:00';
   totalTimeEl.textContent   = song.duration || '0:00';
 
-  // Highlight playlist item
+  // Highlight playlist
   document.querySelectorAll('.playlist li').forEach((li, i) => {
     li.classList.toggle('active', i === index);
     li.classList.remove('playing');
   });
-
-  // Scroll active item into view
   const activeItem = playlist.querySelector('li.active');
   if (activeItem) activeItem.scrollIntoView({ block: 'nearest', behavior: 'smooth' });
 
-  // Save to localStorage
   localStorage.setItem('lastSongIndex', index);
 }
 
@@ -321,7 +371,6 @@ function setPlayingUI(playing) {
   albumRing.classList.toggle('spinning', playing);
   equalizerEl.classList.toggle('active', playing);
 
-  // Playlist item playing class
   document.querySelectorAll('.playlist li').forEach((li, i) => {
     li.classList.toggle('playing', playing && i === currentIndex);
   });
